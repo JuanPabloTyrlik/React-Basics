@@ -1,6 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Producto from './components/Producto';
+import Carrito from './components/Carrito';
 
 function App() {
 
@@ -11,10 +13,26 @@ function App() {
     {id: 4, nombre: 'Camisa Vue', precio: 20}
   ]);
 
+  const [carrito, setCarrito] = useState([]);
+
   return (
     <Fragment>
       <Header 
         title = 'Tienda Virtual'
+      />
+      {
+        productos.map(producto => (
+          <Producto 
+            key = {producto.id}
+            producto = {producto}
+            carrito = {carrito}
+            setCarrito = {setCarrito}
+          />
+        ))
+      }
+      <Carrito 
+        carrito={carrito}
+        setCarrito={setCarrito}
       />
       <Footer 
         year = {new Date().getFullYear()}
